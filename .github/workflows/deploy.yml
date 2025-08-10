@@ -28,7 +28,8 @@ jobs:
           password: ${{ secrets.HARITAM_PASSWORD }}
           protocol: ftps
           port: ${{ secrets.HARITAM_PORT }}
-          local-dir: ./           # see note below
+          local-dir: "./haritam website/"
+ # see note below
           server-dir: ${{ secrets.HARITAM_REMOTE_PATH }}
           dangerous-clean-slate: false
           exclude: |
