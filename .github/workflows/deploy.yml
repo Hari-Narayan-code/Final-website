@@ -21,7 +21,11 @@ jobs:
           fi
 
       - name: Deploy via FTPS (SamKirkland)
-        uses: SamKirkland/FTP-Deploy-Action@v4
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+# if that fails, try:
+# uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+# uses: SamKirkland/FTP-Deploy-Action@4.3.5
+
         with:
           server: ${{ secrets.HARITAM_HOST }}
           username: ${{ secrets.HARITAM_USERNAME }}
