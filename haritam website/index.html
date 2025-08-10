@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Haritam Restaurant — Healthy vegetarian meals in an upscale, traditional setting.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Haritam Restaurant in Mylapore serves traditional South-Indian vegetarian cuisine in an elegant, impeccably clean setting."/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="logo.png" />
+  <meta property="og:title" content="Haritam Restaurant, Mylapore" />
+  <meta property="og:description" content="Healthy vegetarian meals in an upscale, traditional setting." />
+  <meta property="og:image" content="hero.jpg" />
+  <meta property="og:type" content="website" />
+  <style>
+    :root{
+      --bg:#F5F0E6;--olive:#3A5A40;--olive-70:#56765f;--brass:#B08D57;--ink:#2b2b2b;--white:#fff;
+      --radius:16px;--shadow:0 8px 24px rgba(0,0,0,.08)
+    }
+    *{box-sizing:border-box} html,body{margin:0;padding:0}
+    body{
+      background-color:var(--bg);color:var(--ink);
+      font-family:"Nunito Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6;
+      background-image: radial-gradient(ellipse at 20% 0%, rgba(176,141,87,.08), transparent 50%),
+                        radial-gradient(ellipse at 80% 100%, rgba(58,90,64,.06), transparent 50%);
+      background-attachment: fixed;
+    }
+    h1,h2,h3,h4{font-family:"Cormorant Garamond",Georgia,serif;color:var(--olive)}
+    img{max-width:100%;height:auto;border-radius:12px}
+    a{color:var(--olive)}
+
+    .container{max-width:1100px;margin-inline:auto;padding:clamp(16px,2vw,24px)}
+    .container.narrow{max-width:800px}
+    .section{padding:clamp(32px,4vw,56px) 0}
+    .section.alt{background-color: rgba(255,255,255,.55)}
+    .section-title{font-size:clamp(28px,3.2vw,40px);text-align:center;margin:0 0 8px}
+    .grid{display:grid;gap:20px}
+    .grid.two{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+    .grid.three{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .grid.four{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+    .center{text-align:center}
+    .mt{margin-top:24px}
+    .hidden{position:absolute;left:-9999px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+    .btn{display:inline-block;border:2px solid var(--olive);padding:10px 18px;border-radius:999px;
+      text-decoration:none;transition:.2s ease;cursor:pointer;font-weight:600}
+    .btn-primary{background:var(--olive);color:var(--white)}
+    .btn-primary:hover{transform:translateY(-1px);box-shadow:var(--shadow);background:var(--olive-70)}
+    .btn-outline{color:var(--olive);background:transparent}
+    .btn-outline:hover{background:#fff}
+
+    .chip{border:1px solid var(--olive);background:#fff;padding:8px 14px;border-radius:999px;cursor:pointer}
+    .chip.active{background:var(--olive);color:#fff}
+    .card{background:rgba(255,255,255,.75);padding:18px;border-radius:var(--radius);box-shadow:var(--shadow)}
+
+    .site-header{
+      position:sticky;top:0;z-index:1000;background:rgba(245,240,230,.94);backdrop-filter:saturate(1.2) blur(6px);
+      display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid rgba(58,90,64,.15)
+    }
+    .brand{display:flex;gap:10px;align-items:center;text-decoration:none}
+    .brand-name{font-weight:700;color:var(--olive);font-size:20px}
+    .nav-toggle{display:none;background:none;border:0;font-size:24px;color:var(--olive)}
+    .nav-list{display:flex;gap:14px;list-style:none;margin:0;padding:0;align-items:center}
+    .nav-list a{color:var(--olive);text-decoration:none;font-weight:600}
+    .nav-list a.active{border-bottom:2px solid var(--brass);padding-bottom:4px}
+    @media (max-width:860px){
+      .nav-toggle{display:block}
+      .nav-list{position:absolute;right:16px;top:64px;background:var(--bg);padding:12px;border-radius:12px;box-shadow:var(--shadow);display:none;flex-direction:column;min-width:200px}
+      .nav-list.open{display:flex}
+    }
+
+    .hero{position:relative;isolation:isolate}
+    .hero .hero-img{
+      width:100%;height:60vh;object-fit:cover;border-radius:0;
+      background-image:url('hero.jpg');background-size:cover;background-position:center;
+    }
+    .hero .fallback{width:100%;height:60vh;background:
+      linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,.15)),
+      radial-gradient(circle at 70% 30%, rgba(58,90,64,.35), rgba(58,90,64,.15) 35%, transparent 60%),
+      linear-gradient(120deg, rgba(176,141,87,.35), rgba(176,141,87,.05));
+    }
+    .hero-overlay{
+      position:absolute;inset:0;display:grid;place-content:center;text-align:center;color:#fff;
+      pointer-events:none
+    }
+    .hero-overlay h1{color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.45);font-size:clamp(28px,3.5vw,44px);margin:0 16px}
+    .hero-ctas{margin-top:12px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;pointer-events:auto}
+
+    .page-hero.small{display:grid;place-content:center;height:180px;background:linear-gradient(180deg, rgba(58,90,64,.08), transparent)}
+    .page-hero.small h1{margin:0}
+
+    .form label{display:grid;gap:6px;font-weight:600;color:var(--olive)}
+    .form input,.form textarea,.form select{
+      border:1.5px solid rgba(58,90,64,.35);padding:10px;border-radius:10px;background:rgba(255,255,255,.95)
+    }
+    .form.compact{display:flex;gap:8px;align-items:center}
+    .form .btn{margin-top:10px}
+
+    .testimonials{display:grid;gap:16px}
+    blockquote{background:rgba(255,255,255,.7);padding:16px;border-left:4px solid var(--brass);border-radius:12px;margin:0}
+    blockquote cite{display:block;margin-top:6px;color:var(--olive)}
+
+    .footer-grid{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+    .site-footer{padding:32px 0;background:rgba(255,255,255,.75);border-top:1px solid rgba(58,90,64,.15)}
+    .link-list{list-style:none;padding:0;margin:0}
+    .link-list li{margin-bottom:8px}
+    .social{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+    .social.inline{grid-auto-flow:column;justify-content:flex-start}
+    .fine{font-size:.9rem;color:#555}
+    .copy{text-align:center;margin-top:12px;color:#555}
+
+    .map-wrap{border:3px solid var(--olive);border-radius:16px;overflow:hidden}
+    .map-wrap iframe{width:100%;height:320px;border:0}
+
+    .masonry{columns:1 320px;column-gap:16px}
+    .masonry a{display:block;margin-bottom:16px;break-inside:avoid;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+    .masonry img{display:block;width:100%;height:auto;transition:transform .2s ease}
+    .masonry a:hover img{transform:scale(1.03)}
+
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;z-index:2000}
+    .lightbox img{max-width:90vw;max-height:90vh;border-radius:12px}
+    .lightbox.open{display:flex}
+    .lightbox-close{position:absolute;top:20px;right:20px;background:#fff;border:0;border-radius:50%;width:36px;height:36px;cursor:pointer}
+
+    /* route container visibility */
+    [data-route]{display:none}
+    [data-route].active{display:block}
+  </style>
+</head>
+<body>
+  <!-- Header (used across all sections) -->
+  <header class="site-header" role="banner">
+    <a class="brand" href="#/">
+      <img src="logo.png" alt="Haritam Restaurant logo" width="56" height="56" loading="eager" onerror="this.style.display='none'">
+      <span class="brand-name">Haritam</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">☰</button>
+      <ul id="navMenu" class="nav-list">
+        <li><a data-link href="#/">Home</a></li>
+        <li><a data-link href="#/about">About</a></li>
+        <li><a data-link href="#/menu">Menu</a></li>
+        <li><a data-link href="#/gallery">Gallery</a></li>
+        <li><a class="btn btn-primary" data-link href="#/contact">Reserve</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="app" role="main">
+    <!-- =============== HOME (/ ) =============== -->
+    <section data-route="/" class="active" aria-label="Home">
+      <section class="hero" role="banner" aria-label="Signature dish and interiors">
+        <div class="hero-img fallback" role="img" aria-label="Elegant South-Indian vegetarian dining at Haritam"></div>
+        <div class="hero-overlay">
+          <h1>Healthy vegetarian meals in an upscale, traditional setting.</h1>
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="#/menu">View Menu</a>
+            <a class="btn btn-outline" href="#reserve">Reserve a Table</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h2 class="section-title">Why Choose Haritam</h2>
+          <div class="grid three">
+            <article class="card">
+              <h3>Pure Vegetarian</h3>
+              <p>Authentic South-Indian recipes that are wholesome and balanced, with vegan and gluten-free options.</p>
+            </article>
+            <article class="card">
+              <h3>Pristine Cleanliness</h3>
+              <p>Hygienic kitchen, immaculate dining area, and transparent processes. Certifications available on request.</p>
+            </article>
+            <article class="card">
+              <h3>Rustic Elegance</h3>
+              <p>Temple-inspired architecture, brass accents, and warm lighting create an elevated yet traditional ambiance.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt">
+        <div class="container">
+          <h2 class="section-title">Today’s Specials</h2>
+          <div id="specials" class="grid three"></div>
+          <div class="center"><a class="btn btn-primary" href="#/menu">Explore Full Menu</a></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h2 class="section-title">Featured Dishes</h2>
+          <div id="featured" class="grid four"></div>
+        </div>
+      </section>
+
+      <section id="reserve" class="section">
+        <div class="container">
+          <h2 class="section-title">Reserve a Table</h2>
+          <form name="reservation-home" class="form" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="track('reservation_submit',{page:'home'})">
+            <input type="hidden" name="form-name" value="reservation-home" />
+            <p class="hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+            <div class="grid two">
+              <label> Name <input name="name" type="text" required autocomplete="name" /></label>
+              <label> Email <input name="email" type="email" required autocomplete="email" /></label>
+              <label> Phone <input name="phone" type="tel" required inputmode="tel" /></label>
+              <label> Date <input name="date" type="date" required /></label>
+              <label> Time <input name="time" type="time" required /></label>
+              <label> Guests <input name="guests" type="number" min="1" max="20" required /></label>
+            </div>
+            <label> Message <textarea name="message" rows="3" placeholder="Allergies, seating preference…"></textarea></label>
+            <button class="btn btn-primary" type="submit">Book Reservation</button>
+          </form>
+        </div>
+      </section>
+    </section>
+
+    <!-- =============== ABOUT (/about) =============== -->
+    <section data-route="/about" aria-label="About">
+      <section class="page-hero small"><h1>Our Story</h1></section>
+      <section class="section">
+        <div class="container narrow">
+          <h2>Tradition, Health, and Hospitality</h2>
+          <p>Haritam celebrates the richness of South-Indian vegetarian cuisine in a space that is refined, warm, and impeccably clean. Our kitchen follows time-honored methods, and our team is trained to the highest standards of hygiene and hospitality.</p>
+          <div class="grid three">
+            <figure><img loading="lazy" src="gallery-interior-1.jpg" alt="Traditional brass and wood interiors" onerror="this.style.display='none'"><figcaption>Rustic elegance</figcaption></figure>
+            <figure><img loading="lazy" src="gallery-kitchen.jpg" alt="Clean kitchen" onerror="this.style.display='none'"><figcaption>Pristine kitchen</figcaption></figure>
+            <figure><img loading="lazy" src="gallery-team.jpg" alt="Haritam team" onerror="this.style.display='none'"><figcaption>Warm service</figcaption></figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt">
+        <div class="container narrow">
+          <h2>Hygiene & Safety</h2>
+          <p>We proudly maintain rigorous standards. Ask to view our certifications any time.</p>
+          <ul class="checklist">
+            <li>Food safety compliant (FSSAI)</li>
+            <li>Daily sanitation logs</li>
+            <li>Staff health & hygiene protocols</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h2>What Guests Say</h2>
+          <div class="testimonials">
+            <blockquote>“A serene space that respects tradition and health.” <cite>— Vivek R.</cite></blockquote>
+            <blockquote>“The thali is a masterpiece.” <cite>— Meera L.</cite></blockquote>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- =============== MENU (/menu) =============== -->
+    <section data-route="/menu" aria-label="Menu">
+      <section class="page-hero small"><h1>Our Menu</h1></section>
+      <section class="section">
+        <div class="container">
+          <div class="filters" role="toolbar" aria-label="Menu filters">
+            <button class="chip active" data-filter="all">All</button>
+            <button class="chip" data-filter="Starters">Starters</button>
+            <button class="chip" data-filter="Mains">Mains</button>
+            <button class="chip" data-filter="Desserts">Desserts</button>
+            <button class="chip" data-filter="Vegan">Vegan</button>
+            <button class="chip" data-filter="Gluten-Free">Gluten-Free</button>
+          </div>
+          <div id="menuGrid" class="grid three"></div>
+          <div class="center">
+            <a class="btn btn-primary" href="#/contact">Reserve a Table</a>
+            <a class="btn btn-outline" href="#/contact#order">Order Now</a>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- =============== GALLERY (/gallery) =============== -->
+    <section data-route="/gallery" aria-label="Gallery">
+      <section class="page-hero small"><h1>Gallery</h1></section>
+      <section class="section">
+        <div class="container">
+          <div class="filters" role="toolbar" aria-label="Gallery filters">
+            <button class="chip active" data-gallery="all">All</button>
+            <button class="chip" data-gallery="food">Food</button>
+            <button class="chip" data-gallery="interiors">Interiors</button>
+            <button class="chip" data-gallery="events">Events</button>
+          </div>
+          <div id="galleryGrid" class="masonry">
+            <!-- Replace these with your images (keep data-type) -->
+            <a href="gallery-food-1.jpg" data-type="food"><img src="gallery-food-1.jpg" alt="Signature dish" loading="lazy" onerror="this.parentElement.style.display='none'"></a>
+            <a href="gallery-food-2.jpg" data-type="food"><img src="gallery-food-2.jpg" alt="South-Indian thali" loading="lazy" onerror="this.parentElement.style.display='none'"></a>
+            <a href="gallery-interior-1.jpg" data-type="interiors"><img src="gallery-interior-1.jpg" alt="Warm interior" loading="lazy" onerror="this.parentElement.style.display='none'"></a>
+            <a href="gallery-event-1.jpg" data-type="events"><img src="gallery-event-1.jpg" alt="Private dining event" loading="lazy" onerror="this.parentElement.style.display='none'"></a>
+          </div>
+        </div>
+      </section>
+      <!-- Lightbox -->
+      <div id="lightbox" class="lightbox" aria-hidden="true">
+        <button class="lightbox-close" aria-label="Close">✕</button>
+        <img alt="" id="lightboxImg">
+      </div>
+    </section>
+
+    <!-- =============== CONTACT (/contact) =============== -->
+    <section data-route="/contact" aria-label="Contact & Reservations">
+      <section class="page-hero small"><h1>Contact & Reservations</h1></section>
+      <section class="section">
+        <div class="container grid two">
+          <div>
+            <h2>Visit Us</h2>
+            <p><strong>Address:</strong> Haritam Restaurant, Mylapore, 13/7, PS Siva Swamy Rd, Sullivan Garden, Mylapore, Chennai, Tamil Nadu 600004</p>
+            <p><strong>Phone:</strong> <a href="tel:08015870354">08015870354</a>, <a href="tel:08015884719">08015884719</a></p>
+            <div class="map-wrap" role="region" aria-label="Map to Haritam Restaurant">
+              <iframe title="Haritam Restaurant Location" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=Haritam%20Restaurant%2C%20Mylapore%2C%2013%2F7%2C%20PS%20Siva%20Swamy%20Rd%2C%20Sullivan%20Garden%2C%20Chennai%2C%20Tamil%20Nadu%20600004&output=embed"></iframe>
+            </div>
+            <h3 id="order" class="mt">Order & Catering</h3>
+            <p>For bulk orders and events, call us or leave a note in the reservation form.</p>
+            <ul class="social inline">
+              <li><a aria-label="Instagram" href="https://www.instagram.com/haritam.restaurant/?igsh=MWJ6amM3Y3hwMjkyMg%3D%3D" target="_blank" rel="noopener">Instagram</a></li>
+              <li><a aria-label="YouTube (coming soon)" href="#" aria-disabled="true">YouTube</a></li>
+              <li><a aria-label="LinkedIn (coming soon)" href="#" aria-disabled="true">LinkedIn</a></li>
+            </ul>
+          </div>
+          <div>
+            <h2>Reserve a Table</h2>
+            <form name="reservation-contact" class="form" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="track('reservation_submit',{page:'contact'})">
+              <input type="hidden" name="form-name" value="reservation-contact" />
+              <p class="hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+              <div class="grid two">
+                <label> Name <input name="name" required></label>
+                <label> Email <input name="email" type="email" required></label>
+                <label> Phone <input name="phone" type="tel" required></label>
+                <label> Date <input name="date" type="date" required></label>
+                <label> Time <input name="time" type="time" required></label>
+                <label> Guests <input name="guests" type="number" min="1" max="20" required></label>
+              </div>
+              <label> Message <textarea name="message" rows="3"></textarea></label>
+              <button class="btn btn-primary" type="submit">Book Reservation</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- =============== PRIVACY (/privacy) =============== -->
+    <section data-route="/privacy" aria-label="Privacy Policy">
+      <section class="page-hero small"><h1>Privacy Policy</h1></section>
+      <section class="section">
+        <div class="container narrow">
+          <p>We collect form submissions (reservations, newsletter) to serve you. Data is processed securely and never sold. You may request deletion via phone or Instagram DM.</p>
+        </div>
+      </section>
+    </section>
+
+    <!-- =============== TERMS (/terms) =============== -->
+    <section data-route="/terms" aria-label="Terms of Use">
+      <section class="page-hero small"><h1>Terms of Use</h1></section>
+      <section class="section">
+        <div class="container narrow">
+          <p>By using this site, you agree to our policies. Content and prices may change without notice. All images © Haritam.</p>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="logo.png" alt="Haritam logo" width="56" height="56" onerror="this.style.display='none'">
+        <p>Haritam Restaurant, Mylapore<br>13/7, PS Siva Swamy Rd, Sullivan Garden, Chennai 600004</p>
+        <p><a href="tel:08015870354">08015870354</a> · <a href="tel:08015884719">08015884719</a></p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul class="link-list">
+          <li><a href="#/about">About</a></li>
+          <li><a href="#/menu">Menu</a></li>
+          <li><a href="#/gallery">Gallery</a></li>
+          <li><a href="#/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <ul class="social">
+          <li><a aria-label="Instagram" href="https://www.instagram.com/haritam.restaurant/?igsh=MWJ6amM3Y3hwMjkyMg%3D%3D" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a aria-label="YouTube (coming soon)" href="#" aria-disabled="true">YouTube</a></li>
+          <li><a aria-label="LinkedIn (coming soon)" href="#" aria-disabled="true">LinkedIn</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Newsletter</h4>
+        <form name="newsletter" class="form compact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="track('newsletter_submit',{})">
+          <input type="hidden" name="form-name" value="newsletter" />
+          <p class="hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+          <label class="sr-only" for="newsletter-email">Email</label>
+          <input id="newsletter-email" name="email" type="email" required placeholder="Your email" autocomplete="email">
+          <button class="btn btn-primary" type="submit">Subscribe</button>
+        </form>
+        <p class="fine"><a href="#/privacy">Privacy Policy</a> · <a href="#/terms">Terms of Use</a></p>
+      </div>
+    </div>
+    <p class="copy">© <span id="year"></span> Haritam Restaurant. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // ---------- tiny analytics hook (swap with GA/Tag Manager later) ----------
+    window.dataLayer = window.dataLayer || [];
+    function track(ev, detail){ try{ window.dataLayer.push({event: ev, ...detail}); }catch(e){} }
+
+    // ---------- SPA router (hash-based) ----------
+    const routes = [...document.querySelectorAll('[data-route]')];
+    const navLinks = [...document.querySelectorAll('[data-link]')];
+    function setActiveNav(path){
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#'+path));
+    }
+    function showRoute(){
+      let path = location.hash.slice(1) || '/';
+      if (path.includes('#')) path = path.split('#')[0];
+      routes.forEach(s => s.classList.toggle('active', s.getAttribute('data-route') === path));
+      setActiveNav(path);
+      const firstH1 = document.querySelector(`[data-route="${path}"] h1`);
+      if (firstH1) firstH1.setAttribute('tabindex','-1'), firstH1.focus({preventScroll:true});
+      window.scrollTo({top:0,behavior:'instant'});
+    }
+    window.addEventListener('hashchange', showRoute);
+    window.addEventListener('load', showRoute);
+
+    // ---------- mobile nav toggle ----------
+    const toggle = document.querySelector('.nav-toggle');
+    const navList = document.querySelector('#navMenu');
+    if (toggle && navList){
+      toggle.addEventListener('click', ()=>{
+        const open = navList.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      navList.addEventListener('click', e=>{
+        if (e.target.closest('a')) navList.classList.remove('open'), toggle.setAttribute('aria-expanded','false');
+      });
+    }
+
+    // ---------- year ----------
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ---------- menu data ----------
+    const MENU = [
+      {id:1, name:"Mini Idli with Sambar", price:120, category:["Starters","Vegan","Gluten-Free"], img:"menu-mini-idli.jpg", desc:"Soft bite-sized idli immersed in aromatic sambar."},
+      {id:2, name:"Ghee Podi Dosa", price:180, category:["Mains"], img:"menu-podi-dosa.jpg", desc:"Crispy dosa with house podi and ghee."},
+      {id:3, name:"Traditional Thali", price:320, category:["Mains","Gluten-Free"], img:"menu-thali.jpg", desc:"Balanced, wholesome, and seasonal."},
+      {id:4, name:"Elaneer Payasam", price:160, category:["Desserts","Gluten-Free"], img:"menu-elaneer-payasam.jpg", desc:"Tender coconut pudding."},
+      {id:5, name:"Millet Pongal", price:190, category:["Mains","Vegan","Gluten-Free"], img:"menu-millet-pongal.jpg", desc:"Comforting, healthy millet pongal."},
+      {id:6, name:"Ragi Halwa", price:150, category:["Desserts","Vegan"], img:"menu-ragi-halwa.jpg", desc:"Rich, earthy dessert with jaggery."}
+    ];
+
+    // ---------- build specials & featured on Home ----------
+    (function(){
+      const specialsEl = document.getElementById('specials');
+      const featuredEl = document.getElementById('featured');
+      if (specialsEl){
+        const picks = MENU.slice(0,3);
+        specialsEl.innerHTML = picks.map(card).join('');
+      }
+      if (featuredEl){
+        const picks = MENU.slice(-4);
+        featuredEl.innerHTML = picks.map(card).join('');
+      }
+      function card(item){
+        return `
+          <article class="card" data-cats="${item.category.join(',')}">
+            <img loading="lazy" src="${item.img}" alt="${item.name}" onerror="this.style.display='none'">
+            <h3>${item.name}</h3>
+            <p>${item.desc}</p>
+            <p><strong>₹${item.price}</strong></p>
+          </article>
+        `;
+      }
+    })();
+
+    // ---------- build Menu grid & filters ----------
+    (function(){
+      const grid = document.getElementById('menuGrid');
+      if (!grid) return;
+      function draw(items){
+        grid.innerHTML = items.map(item => `
+          <article class="card" data-cats="${item.category.join(',')}">
+            <img loading="lazy" src="${item.img}" alt="${item.name}" onerror="this.style.display='none'">
+            <div>
+              <h3>${item.name}</h3>
+              <p>${item.desc}</p>
+              <p><strong>₹${item.price}</strong></p>
+            </div>
+          </article>
+        `).join('');
+      }
+      draw(MENU);
+      const chips = document.querySelectorAll('[data-route="/menu"] .filters .chip');
+      chips.forEach(ch => ch.addEventListener('click', ()=>{
+        chips.forEach(c=>c.classList.remove('active'));
+        ch.classList.add('active');
+        const f = ch.dataset.filter;
+        if (f === 'all') return draw(MENU);
+        draw(MENU.filter(i => i.category.includes(f)));
+      }));
+    })();
+
+    // ---------- gallery filter + lightbox ----------
+    (function(){
+      const grid = document.getElementById('galleryGrid');
+      if (!grid) return;
+      const chips = document.querySelectorAll('[data-gallery]');
+      chips.forEach(ch => ch.addEventListener('click', ()=>{
+        chips.forEach(c=>c.classList.remove('active'));
+        ch.classList.add('active');
+        const f = ch.dataset.gallery;
+        [...grid.querySelectorAll('a')].forEach(a=>{
+          const type = a.getAttribute('data-type');
+          a.style.display = (f === 'all' || f === type) ? '' : 'none';
+        });
+      }));
+      const lightbox = document.getElementById('lightbox');
+      const lightImg = document.getElementById('lightboxImg');
+      const closeBtn = document.querySelector('.lightbox-close');
+      grid.addEventListener('click', (e)=>{
+        const a = e.target.closest('a'); if (!a) return;
+        e.preventDefault();
+        lightImg.src = a.href;
+        lightImg.alt = a.querySelector('img')?.alt || '';
+        lightbox.classList.add('open'); lightbox.setAttribute('aria-hidden','false');
+      });
+      function close(){ lightbox.classList.remove('open'); lightbox.setAttribute('aria-hidden','true'); lightImg.src=''; }
+      closeBtn?.addEventListener('click', close);
+      lightbox?.addEventListener('click', (e)=>{ if (e.target === lightbox) close(); });
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+    })();
+
+    // ---------- smooth in-page anchor scroll (for #reserve) ----------
+    document.addEventListener('click',(e)=>{
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      const href = a.getAttribute('href');
+      if (href.startsWith('#/')) return;
+      e.preventDefault();
+      const el = document.querySelector(href);
+      if (el) el.scrollIntoView({behavior:'smooth'});
+    });
+  </script>
+</body>
+</html>
