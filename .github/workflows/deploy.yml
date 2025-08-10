@@ -1,0 +1,37 @@
+name: Deploy Haritam Theme via FTPS (BigRock WP Hosting)
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "**"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build (npm if present)
+        run: |
+          if [ -f package.json ]; then
+            npm ci
+            npm run build || npm run prod || true
+          fi
+
+      - name: Deploy via FTPS (SamKirkland)
+        uses: SamKirkland/FTP-Deploy-Action@v4
+        with:
+          server: ${{ secrets.HARITAM_HOST }}
+          username: ${{ secrets.HARITAM_USERNAME }}
+          password: ${{ secrets.HARITAM_PASSWORD }}
+          protocol: ftps
+          port: ${{ secrets.HARITAM_PORT }}
+          local-dir: ./           # see note below
+          server-dir: ${{ secrets.HARITAM_REMOTE_PATH }}
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/node_modules/**
+            **/*.map
