@@ -2,15 +2,80 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "images/uploads"
-public_folder: "/images/uploads"
+site_url: https://www.haritam-restaurant.com
+display_url: https://www.haritam-restaurant.com
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+publish_mode: editorial_workflow
 
 collections:
-  - name: "pages"
-    label: "Pages"
+  - name: "site"
+    label: "Site Content"
     files:
-      - label: "Home Page Content"
-        name: "home"
-        file: "content/home.md"
+      - file: "content/content.json"
+        label: "Main Content"
+        name: "main"
         fields:
-          - { label: "Body", name: "body", widget: "markdown" }
+          - { label: "SEO Title", name: "seo_title", widget: "string" }
+          - { label: "SEO Description", name: "seo_description", widget: "text" }
+          - { label: "OG Image", name: "og_image", widget: "image", required: false }
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Subtitle", name: "subtitle", widget: "text" }
+              - { label: "CTA Text", name: "cta_text", widget: "string", required: false }
+              - { label: "Hero Image", name: "image", widget: "image", required: false }
+          - label: "About"
+            name: "about"
+            widget: "object"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }
+              - { label: "Image", name: "image", widget: "image", required: false }
+          - label: "Hours"
+            name: "hours"
+            widget: "object"
+            fields:
+              - { label: "Text", name: "text", widget: "text" }
+          - label: "Contact"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "Address", name: "address", widget: "text" }
+              - { label: "Phone (Primary)", name: "phone1", widget: "string" }
+              - { label: "Phone (Secondary)", name: "phone2", widget: "string", required: false }
+              - { label: "Instagram URL", name: "instagram", widget: "string" }
+              - { label: "Reservation URL", name: "reservation_url", widget: "string", required: false }
+          - label: "Gallery"
+            name: "gallery"
+            widget: "list"
+            field: { label: "Image", name: "image", widget: "image" }
+          - label: "Menu Sections"
+            name: "menu"
+            widget: "list"
+            fields:
+              - { label: "Section Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - label: "Items"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Name", name: "name", widget: "string" }
+                  - { label: "Note / Description", name: "note", widget: "string", required: false }
+                  - { label: "Price", name: "price", widget: "string", required: false }
+  - name: "pages"
+    label: "Sub-Pages"
+    folder: "content/pages"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime", required: false }
+      - { label: "Featured Image", name: "cover", widget: "image", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
