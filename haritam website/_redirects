@@ -1,0 +1,4 @@
+# Canonical redirects
+http://haritam-restaurant.com/*   https://haritam-restaurant.com/:splat   301!
+http://www.haritam-restaurant.com/*   https://haritam-restaurant.com/:splat   301!
+https://www.haritam-restaurant.com/*   https://haritam-restaurant.com/:splat   301!
