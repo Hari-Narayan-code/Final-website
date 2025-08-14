@@ -1,3 +1,7 @@
+/google79149ee3280e122c.html  /google79149ee3280e122c.html  200
+/sitemap.xml                  /sitemap.xml                  200
+/robots.txt                   /robots.txt                   200
+/*                            /index.html                   200
 # Canonical redirects
 http://haritam-restaurant.com/*   https://haritam-restaurant.com/:splat   301!
 http://www.haritam-restaurant.com/*   https://haritam-restaurant.com/:splat   301!
