@@ -250,35 +250,34 @@
     .preloader-inner .ring{ animation:none }
   }
 </style>
-
-
-<style id="wa-feedback-style">
-  /* Floating WhatsApp feedback button (fixed while scrolling) */
+<style id="wa-feedback-style-v2">
+  :root{
+    /* Bottom inset respects iPhone home indicator when toolbars hide/show */
+    --fab-inset-b: max(16px, env(safe-area-inset-bottom));
+  }
   #wa-feedback{
     position: fixed;
-    left: 16px;
-    bottom: 18px;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: #25D366;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    inset-inline-start: 16px;    /* left (RTL-friendly) */
+    inset-block-end: var(--fab-inset-b); /* bottom */
+    width: 56px; height: 56px; border-radius: 50%;
+    background: #25D366; color: #fff;
+    display: flex; align-items: center; justify-content: center;
     box-shadow: 0 10px 24px rgba(0,0,0,.18);
-    z-index: 2000;
+    z-index: 9999;
+    /* iOS scroll-jank guards */
+    transform: translateZ(0);
+    will-change: transform;
+    contain: layout paint;
+    -webkit-tap-highlight-color: transparent;
     text-decoration: none;
-    transition: transform .15s ease, box-shadow .15s ease;
   }
-  #wa-feedback:hover{ transform: translateY(-2px); box-shadow: 0 14px 28px rgba(0,0,0,.22); }
+  #wa-feedback:hover{ transform: translateZ(0) translateY(-2px); }
   #wa-feedback:focus{ outline: 2px solid #fff; outline-offset: 2px; }
   #wa-feedback svg{ width: 26px; height: 26px; fill: #fff; }
   @media (max-width: 480px){
-    #wa-feedback{ width: 52px; height: 52px; left: 14px; bottom: 16px; }
+    #wa-feedback{ width: 52px; height: 52px; }
   }
 </style>
-
 </head>
 <script src="/cms/content-apply.js" defer></script>
   \1
