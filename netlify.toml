@@ -1,0 +1,27 @@
+# /netlify.toml
+[[headers]]
+for = "/*"
+  [headers.values]
+  # Force HTTPS everywhere and preload (HSTS)
+  Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+  # Prevent MIME sniffing
+  X-Content-Type-Options = "nosniff"
+  # Don’t allow other sites to frame yours
+  X-Frame-Options = "DENY"
+  # Trim referrers for privacy
+  Referrer-Policy = "strict-origin-when-cross-origin"
+  # Disable powerful APIs by default
+  Permissions-Policy = "geolocation=(), camera=(), microphone=(), payment=(), usb=()"
+
+  # Content Security Policy (permissive enough for your current code)
+  # We'll tighten after we confirm nothing breaks.
+  Content-Security-Policy = """
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net;
+    style-src  'self' 'unsafe-inline' https://fonts.googleapis.com;
+    img-src    'self' data: https://www.googletagmanager.com https://www.google-analytics.com;
+    font-src   'self' https://fonts.gstatic.com;
+    connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com;
+    frame-src  https://www.google.com;
+    object-src 'none';
+  """
