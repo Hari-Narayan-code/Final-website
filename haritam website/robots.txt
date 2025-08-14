@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
+
 Sitemap: https://haritam-restaurant.com/sitemap.xml
