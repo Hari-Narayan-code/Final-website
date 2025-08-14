@@ -492,7 +492,6 @@
   </div>
 
   <script>
-    document.addEventListener('click',(e)=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const id=a.getAttribute('href');const el=document.querySelector(id);if(!el)return;e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'});document.querySelectorAll('nav a').forEach(x=>x.classList.toggle('active',x===a));});
     const toggle=document.querySelector('.nav-toggle');const nav=document.getElementById('nav');toggle?.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',open?'true':'false');});
     const header=document.querySelector('.site-header');const onScroll=()=>header.classList.toggle('scrolled',window.scrollY>6);onScroll();window.addEventListener('scroll',onScroll,{passive:true});
     const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
